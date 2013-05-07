@@ -3,21 +3,22 @@
 #include "ofMain.h"
 
 #include "ofxLibMagic.h"
+#include "Poco/File.h"
 #include "Poco/Exception.h"
 
-using ofx::Lib::Magic;
-
-class testApp : public ofBaseApp{
-
+class exampleApp : public ofBaseApp {
 public:
     void setup();
     void draw();
 
     void dragEvent(ofDragInfo dragInfo);
 
+    ofx::Lib::Magic magic;
+
     string instructions;
-    string filename;
-    string mimeType;
-    string fileDescription;
+
+    Poco::File file;
+    string mediaType;
+    string mediaDescription;
 
 };
