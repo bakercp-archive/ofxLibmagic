@@ -31,10 +31,49 @@ namespace Lib {
 
 
 //------------------------------------------------------------------------------
-std::string Magic::getType(const ofFile& file, int flags) {
+Magic::Magic()
+{
+}
+
+//------------------------------------------------------------------------------
+Magic::~Magic()
+{
+}
+
+//------------------------------------------------------------------------------
+Poco::Net::MediaType Magic::getMediaTypeForFile(const Poco::File& file) const
+{
+    int flags = MAGIC_MIME;
+    return Poco::Net::MediaType(getType(file, flags));
+}
+
+//------------------------------------------------------------------------------
+Poco::Net::MediaType Magic::getMediaTypeForSuffix(const std::string& suffix) const
+{
+    return _map.getMediaTypeForSuffix(suffix);
+}
+
+//------------------------------------------------------------------------------
+Poco::Net::MediaType Magic::getMediaTypeForPath(const Poco::Path& path) const
+{
+    int flags = MAGIC_MIME;
+    return Poco::Net::MediaType(getType(path.toString(), flags));
+}
+
+//------------------------------------------------------------------------------
+std::string Magic::getMediaDescription(const Poco::File& file, bool bExamineCompressed) const {
+    int flags = MAGIC_NONE;
+
+    if(bExamineCompressed) flags |= MAGIC_COMPRESS;
+
+    return getType(file, flags);
+}
+
+//------------------------------------------------------------------------------
+std::string Magic::getType(const Poco::File& file, int flags) const {
 
     if(!file.exists()) {
-        throw Poco::FileNotFoundException(file.getAbsolutePath());
+        throw Poco::FileNotFoundException(file.path());
     }
 
     magic_t magic_cookie_ptr;
@@ -51,7 +90,7 @@ std::string Magic::getType(const ofFile& file, int flags) {
         throw Poco::IOException("Unable to load magic database: " + errorString);
     }
 
-    const char* result = magic_file(magic_cookie_ptr, file.getAbsolutePath().c_str());
+    const char* result = magic_file(magic_cookie_ptr, file.path().c_str());
 
     if(result == NULL) {
         std::string errorString = magic_error(magic_cookie_ptr);
@@ -59,29 +98,11 @@ std::string Magic::getType(const ofFile& file, int flags) {
         throw Poco::IOException("magic_file returned NULL: " + errorString);
     }
 
-    string resultString = result; // copy before close
-
+    std::string resultString = result; // copy before close
+    
     magic_close(magic_cookie_ptr);
-
+    
     return resultString;
-}
-
-//------------------------------------------------------------------------------
-std::string Magic::getTypeDescription(const ofFile& file, bool bExamineCompressed) {
-    int flags = MAGIC_NONE;
-
-    if(bExamineCompressed) flags |= MAGIC_COMPRESS;
-
-    return getType(file, flags);
-}
-
-//------------------------------------------------------------------------------
-Magic::MediaType Magic::getMimeType(const ofFile& file, bool bExamineCompressed) {
-    int flags = MAGIC_MIME;
-
-    if(bExamineCompressed) flags |= MAGIC_COMPRESS;
-
-    return Magic::MediaType(getType(file, flags));
 }
 
 

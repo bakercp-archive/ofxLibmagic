@@ -30,20 +30,28 @@
 #include <magic.h>
 #include "Poco/Exception.h"
 #include "Poco/Net/MediaType.h"
-#include "ofFileUtils.h"
-
+#include "BaseMediaTypeProvider.h"
+#include "MediaTypeMap.h"
 
 namespace ofx {
 namespace Lib {
 
 
-class Magic {
+class Magic : public Media::BaseMediaTypeProvider {
 public:
-    typedef Poco::Net::MediaType MediaType;
+    Magic();
+    virtual ~Magic();
 
-    static std::string getType(const ofFile& file, int flags = MAGIC_NONE);
-    static std::string getTypeDescription(const ofFile& file, bool bExamineCompressed = false);
-    static MediaType   getMimeType(const ofFile& file, bool bExamineCompressed = false);
+    Poco::Net::MediaType getMediaTypeForFile(const Poco::File& file) const;
+    Poco::Net::MediaType getMediaTypeForSuffix(const std::string& suffix) const;
+    Poco::Net::MediaType getMediaTypeForPath(const Poco::Path& path) const;
+
+    std::string getMediaDescription(const Poco::File& file, bool bExamineCompressed = false) const;
+
+    std::string getType(const Poco::File& file, int flags) const;
+
+private:
+    Media::MediaTypeMap _map;
 
 };
 
