@@ -33,11 +33,13 @@
 #include "BaseMediaTypeProvider.h"
 #include "MediaTypeMap.h"
 
+
 namespace ofx {
-namespace Lib {
+namespace Media {
 
 
-class Magic : public Media::BaseMediaTypeProvider {
+class Magic: public Media::BaseMediaTypeProvider
+{
 public:
     Magic();
     virtual ~Magic();
@@ -56,5 +58,5 @@ private:
 };
 
 
-} }
+} } // namespace ofx::Media
 

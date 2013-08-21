@@ -27,7 +27,7 @@
 
 
 namespace ofx {
-namespace Lib {
+namespace Media {
 
 
 //------------------------------------------------------------------------------
@@ -44,6 +44,7 @@ Magic::~Magic()
 Poco::Net::MediaType Magic::getMediaTypeForFile(const Poco::File& file) const
 {
     int flags = MAGIC_MIME;
+    
     return Poco::Net::MediaType(getType(file, flags));
 }
 
@@ -57,11 +58,13 @@ Poco::Net::MediaType Magic::getMediaTypeForSuffix(const std::string& suffix) con
 Poco::Net::MediaType Magic::getMediaTypeForPath(const Poco::Path& path) const
 {
     int flags = MAGIC_MIME;
+    
     return Poco::Net::MediaType(getType(path.toString(), flags));
 }
 
 //------------------------------------------------------------------------------
-std::string Magic::getMediaDescription(const Poco::File& file, bool bExamineCompressed) const {
+std::string Magic::getMediaDescription(const Poco::File& file, bool bExamineCompressed) const
+{
     int flags = MAGIC_NONE;
 
     if(bExamineCompressed) flags |= MAGIC_COMPRESS;
@@ -70,17 +73,19 @@ std::string Magic::getMediaDescription(const Poco::File& file, bool bExamineComp
 }
 
 //------------------------------------------------------------------------------
-std::string Magic::getType(const Poco::File& file, int flags) const {
-
-    if(!file.exists()) {
+std::string Magic::getType(const Poco::File& file, int flags) const
+{
+    if(!file.exists())
+    {
         throw Poco::FileNotFoundException(file.path());
     }
-
+    
     magic_t magic_cookie_ptr;
 
     magic_cookie_ptr = magic_open(flags);
 
-    if (magic_cookie_ptr == NULL) {
+    if (magic_cookie_ptr == NULL)
+    {
         throw Poco::IOException("Unable to initialize magic magic_cookie_ptr");
     }
 
@@ -92,7 +97,8 @@ std::string Magic::getType(const Poco::File& file, int flags) const {
 
     const char* result = magic_file(magic_cookie_ptr, file.path().c_str());
 
-    if(result == NULL) {
+    if(result == NULL)
+    {
         std::string errorString = magic_error(magic_cookie_ptr);
         magic_close(magic_cookie_ptr);
         throw Poco::IOException("magic_file returned NULL: " + errorString);
@@ -106,4 +112,4 @@ std::string Magic::getType(const Poco::File& file, int flags) const {
 }
 
 
-} }
+} } // namespace ofx::Media
