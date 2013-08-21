@@ -26,8 +26,42 @@
 #include "ofApp.h"
 
 
-int main()
-{
-	ofSetupOpenGL(1024,115,OF_WINDOW);
-	ofRunApp(new ofApp());
+//------------------------------------------------------------------------------
+void ofApp::setup(){
+    instructions = "Drag file onto window for more info.";
+    mediaType = "";
+    mediaDescription = "";
+
+    // simulate a drag for platforms that don't support drag events
+    ofDragInfo simulatedDrag;
+    simulatedDrag.files.push_back(ofToDataPath("automat.ttf"));
+    ofNotifyDragEvent(simulatedDrag);
+}
+
+//------------------------------------------------------------------------------
+void ofApp::draw(){
+    ofBackground(0);
+
+    ofDrawBitmapString(instructions, 10, 15);
+    ofDrawBitmapString(file.path(), 10, 45);
+    ofDrawBitmapString(mediaType, 10, 75);
+    ofDrawBitmapString(mediaDescription, 10, 105);
+}
+
+//------------------------------------------------------------------------------
+void ofApp::dragEvent(ofDragInfo dragInfo) {
+
+    if(!dragInfo.files.empty()) {
+        file = Poco::File(dragInfo.files[0]);
+        try {
+            Poco::Net::MediaType mt = magic.getMediaTypeForFile(file);
+            mediaType = mt.toString();
+            mediaDescription = magic.getMediaDescription(file);
+
+        } catch(const Poco::Exception& exc) {
+            mediaType = "";
+            mediaDescription = exc.displayText();
+        }
+    }
+    
 }

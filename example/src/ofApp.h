@@ -23,11 +23,29 @@
 // =============================================================================
 
 
-#include "ofApp.h"
+#pragma once
 
 
-int main()
+#include "ofMain.h"
+#include "ofxLibMagic.h"
+#include "Poco/File.h"
+#include "Poco/Exception.h"
+
+
+class ofApp: public ofBaseApp
 {
-	ofSetupOpenGL(1024,115,OF_WINDOW);
-	ofRunApp(new ofApp());
-}
+public:
+    void setup();
+    void draw();
+
+    void dragEvent(ofDragInfo dragInfo);
+
+    ofx::Media::Magic magic;
+
+    std::string instructions;
+
+    Poco::File file;
+    std::string mediaType;
+    std::string mediaDescription;
+
+};
