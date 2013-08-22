@@ -38,9 +38,11 @@ namespace ofx {
 namespace Media {
 
 
-class Magic: public Media::BaseMediaTypeProvider
+class Magic: public BaseMediaTypeProvider
 {
 public:
+    typedef std::shared_ptr<Magic> Ptr;
+    
     Magic();
     virtual ~Magic();
 
