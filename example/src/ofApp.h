@@ -28,8 +28,11 @@
 
 #include "ofMain.h"
 #include "ofxLibMagic.h"
+#include "MediaTypeUtils.h"
 #include "Poco/File.h"
 #include "Poco/Exception.h"
+
+using namespace ofx::Media;
 
 
 class ofApp: public ofBaseApp
@@ -39,8 +42,6 @@ public:
     void draw();
 
     void dragEvent(ofDragInfo dragInfo);
-
-    ofx::Media::Magic magic;
 
     std::string instructions;
 

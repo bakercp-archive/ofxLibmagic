@@ -28,11 +28,15 @@
 
 //------------------------------------------------------------------------------
 void ofApp::setup(){
+    // set libmagic to be the default mediatype provider
+    setMediaTypeProvider(Magic::Ptr(new Magic()));
+
+
     instructions = "Drag file onto window for more info.";
     mediaType = "";
     mediaDescription = "";
 
-    // simulate a drag for platforms that don't support drag events
+    // simulate a drag event for platforms that don't yet support drag events
     ofDragInfo simulatedDrag;
     simulatedDrag.files.push_back(ofToDataPath("automat.ttf"));
     ofNotifyDragEvent(simulatedDrag);
@@ -54,9 +58,9 @@ void ofApp::dragEvent(ofDragInfo dragInfo) {
     if(!dragInfo.files.empty()) {
         file = Poco::File(dragInfo.files[0]);
         try {
-            Poco::Net::MediaType mt = magic.getMediaTypeForFile(file);
+            Poco::Net::MediaType mt = getMediaTypeForFile(file);
             mediaType = mt.toString();
-            mediaDescription = magic.getMediaDescription(file);
+            mediaDescription = getMediaDescription(file);
 
         } catch(const Poco::Exception& exc) {
             mediaType = "";

@@ -1,2 +1,2 @@
-ofxMediaType
 ofxLibmagic
+ofxMediaType
