@@ -52,6 +52,12 @@ public:
 
     std::string getType(const Poco::Path& path, int flags) const;
 
+    static SharedPtr getDefault()
+    {
+        static SharedPtr ptr = SharedPtr(new Magic());
+        return ptr;
+    }
+
 };
 
 
