@@ -6,7 +6,7 @@ File type discovery via libmagic (http://sourceforge.net/projects/libmagic/)!
 You give it a binary file.  It will return a MIME type and description.
 
 
-For Linux / Ubuntu
+For Linux (Ubuntu, Raspberry Pi, etc)u
 ---
 
 ```
