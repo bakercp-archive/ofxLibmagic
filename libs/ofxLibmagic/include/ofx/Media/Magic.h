@@ -30,8 +30,8 @@
 #include <magic.h>
 #include "Poco/Exception.h"
 #include "Poco/Net/MediaType.h"
-#include "BaseMediaTypeProvider.h"
-#include "MediaTypeMap.h"
+#include "ofx/Media/BaseMediaTypeProvider.h"
+#include "ofx/Media/MediaTypeMap.h"
 
 
 namespace ofx {

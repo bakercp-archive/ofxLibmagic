@@ -23,7 +23,7 @@
 // =============================================================================
 
 
-#include "ofxLibMagic.h"
+#include "ofx/Media/Magic.h"
 
 
 namespace ofx {
