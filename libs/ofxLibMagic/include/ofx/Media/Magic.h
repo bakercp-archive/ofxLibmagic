@@ -26,30 +26,34 @@
 #pragma once
 
 
-#include "ofMain.h"
-#include "ofxLibmagic.h"
-#include "Poco/File.h"
+#include <string>
+#include <magic.h>
 #include "Poco/Exception.h"
+#include "Poco/Net/MediaType.h"
+#include "BaseMediaTypeProvider.h"
+#include "MediaTypeMap.h"
 
 
-using namespace ofx::Media;
+namespace ofx {
+namespace Media {
 
 
-class ofApp: public ofBaseApp
+class Magic: public BaseMediaTypeProvider
 {
 public:
-    void setup();
-    void draw();
+    typedef std::shared_ptr<Magic> SharedPtr;
+    
+    Magic();
+    virtual ~Magic();
 
-    void dragEvent(ofDragInfo dragInfo);
+    Poco::Net::MediaType getMediaTypeForPath(const Poco::Path& path) const;
+    std::string getMediaDescription(const Poco::Path& path, bool bExamineCompressed = false) const;
 
-    BaseMediaTypeProvider::SharedPtr mediaTypeProvider;
 
-
-    std::string instructions;
-
-    Poco::File file;
-    std::string mediaType;
-    std::string mediaDescription;
+    std::string getType(const Poco::Path& path, int flags) const;
 
 };
+
+
+} } // namespace ofx::Media
+

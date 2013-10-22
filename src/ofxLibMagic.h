@@ -26,39 +26,4 @@
 #pragma once
 
 
-#include <string>
-#include <magic.h>
-#include "Poco/Exception.h"
-#include "Poco/Net/MediaType.h"
-#include "BaseMediaTypeProvider.h"
-#include "MediaTypeMap.h"
-
-
-namespace ofx {
-namespace Media {
-
-
-class Magic: public BaseMediaTypeProvider
-{
-public:
-    typedef std::shared_ptr<Magic> Ptr;
-    
-    Magic();
-    virtual ~Magic();
-
-    Poco::Net::MediaType getMediaTypeForFile(const Poco::File& file) const;
-    Poco::Net::MediaType getMediaTypeForSuffix(const std::string& suffix) const;
-    Poco::Net::MediaType getMediaTypeForPath(const Poco::Path& path) const;
-
-    std::string getMediaDescription(const Poco::File& file, bool bExamineCompressed = false) const;
-
-    std::string getType(const Poco::File& file, int flags) const;
-
-private:
-    Media::MediaTypeMap _map;
-
-};
-
-
-} } // namespace ofx::Media
-
+#include "ofx/Media/Magic.h"

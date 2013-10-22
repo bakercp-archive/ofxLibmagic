@@ -27,10 +27,9 @@
 
 
 //------------------------------------------------------------------------------
-void ofApp::setup(){
-    // set libmagic to be the default mediatype provider
-    setMediaTypeProvider(Magic::Ptr(new Magic()));
-
+void ofApp::setup()
+{
+    mediaTypeProvider = Magic::SharedPtr(new Magic());
 
     instructions = "Drag file onto window for more info.";
     mediaType = "";
@@ -43,7 +42,8 @@ void ofApp::setup(){
 }
 
 //------------------------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw()
+{
     ofBackground(0);
 
     ofDrawBitmapString(instructions, 10, 15);
@@ -53,19 +53,22 @@ void ofApp::draw(){
 }
 
 //------------------------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo) {
-
-    if(!dragInfo.files.empty()) {
+void ofApp::dragEvent(ofDragInfo dragInfo)
+{
+    if(!dragInfo.files.empty())
+    {
         file = Poco::File(dragInfo.files[0]);
-        try {
-            Poco::Net::MediaType mt = getMediaTypeForFile(file);
-            mediaType = mt.toString();
-            mediaDescription = getMediaDescription(file);
+        try
+        {
+            Poco::Net::MediaType mt = mediaTypeProvider->getMediaTypeForPath(file.path());
 
-        } catch(const Poco::Exception& exc) {
+            mediaType = mt.toString();
+            mediaDescription = mediaTypeProvider->getMediaDescription(file.path(),false);
+        }
+        catch (const Poco::Exception& exc)
+        {
             mediaType = "";
             mediaDescription = exc.displayText();
         }
     }
-    
 }

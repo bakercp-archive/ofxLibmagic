@@ -35,46 +35,30 @@ Magic::Magic()
 {
 }
 
-//------------------------------------------------------------------------------
 Magic::~Magic()
 {
 }
 
-//------------------------------------------------------------------------------
-Poco::Net::MediaType Magic::getMediaTypeForFile(const Poco::File& file) const
-{
-    int flags = MAGIC_MIME;
-    
-    return Poco::Net::MediaType(getType(file, flags));
-}
-
-//------------------------------------------------------------------------------
-Poco::Net::MediaType Magic::getMediaTypeForSuffix(const std::string& suffix) const
-{
-    return _map.getMediaTypeForSuffix(suffix);
-}
-
-//------------------------------------------------------------------------------
 Poco::Net::MediaType Magic::getMediaTypeForPath(const Poco::Path& path) const
 {
-    int flags = MAGIC_MIME;
-    
-    return Poco::Net::MediaType(getType(path.toString(), flags));
+    return Poco::Net::MediaType(getType(path, MAGIC_MIME));
 }
 
 //------------------------------------------------------------------------------
-std::string Magic::getMediaDescription(const Poco::File& file, bool bExamineCompressed) const
+std::string Magic::getMediaDescription(const Poco::Path& path, bool bExamineCompressed) const
 {
     int flags = MAGIC_NONE;
 
     if(bExamineCompressed) flags |= MAGIC_COMPRESS;
 
-    return getType(file, flags);
+    return getType(path, flags);
 }
 
 //------------------------------------------------------------------------------
-std::string Magic::getType(const Poco::File& file, int flags) const
+std::string Magic::getType(const Poco::Path& path, int flags) const
 {
+    Poco::File file(path);
+
     if(!file.exists())
     {
         throw Poco::FileNotFoundException(file.path());
@@ -95,7 +79,7 @@ std::string Magic::getType(const Poco::File& file, int flags) const
         throw Poco::IOException("Unable to load magic database: " + errorString);
     }
 
-    const char* result = magic_file(magic_cookie_ptr, file.path().c_str());
+    const char* result = magic_file(magic_cookie_ptr, path.toString().c_str());
 
     if(result == NULL)
     {
