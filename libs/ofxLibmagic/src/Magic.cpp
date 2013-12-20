@@ -30,10 +30,10 @@ namespace ofx {
 namespace Media {
 
 
-//------------------------------------------------------------------------------
 Magic::Magic()
 {
 }
+
 
 Magic::~Magic()
 {
@@ -44,17 +44,21 @@ Poco::Net::MediaType Magic::getMediaTypeForPath(const Poco::Path& path) const
     return Poco::Net::MediaType(getType(path, MAGIC_MIME));
 }
 
-//------------------------------------------------------------------------------
-std::string Magic::getMediaDescription(const Poco::Path& path, bool bExamineCompressed) const
+
+std::string Magic::getMediaDescription(const Poco::Path& path,
+                                       bool examineCompressed) const
 {
     int flags = MAGIC_NONE;
 
-    if(bExamineCompressed) flags |= MAGIC_COMPRESS;
+    if(examineCompressed)
+    {
+        flags |= MAGIC_COMPRESS;
+    }
 
     return getType(path, flags);
 }
 
-//------------------------------------------------------------------------------
+
 std::string Magic::getType(const Poco::Path& path, int flags) const
 {
     Poco::File file(path);
@@ -68,12 +72,12 @@ std::string Magic::getType(const Poco::Path& path, int flags) const
 
     magic_cookie_ptr = magic_open(flags);
 
-    if (magic_cookie_ptr == NULL)
+    if (!magic_cookie_ptr)
     {
         throw Poco::IOException("Unable to initialize magic magic_cookie_ptr");
     }
 
-    if (magic_load(magic_cookie_ptr, NULL) != 0) {
+    if (magic_load(magic_cookie_ptr, 0) != 0) {
         std::string errorString = magic_error(magic_cookie_ptr);
         magic_close(magic_cookie_ptr);
         throw Poco::IOException("Unable to load magic database: " + errorString);
@@ -81,7 +85,7 @@ std::string Magic::getType(const Poco::Path& path, int flags) const
 
     const char* result = magic_file(magic_cookie_ptr, path.toString().c_str());
 
-    if(result == NULL)
+    if(!result)
     {
         std::string errorString = magic_error(magic_cookie_ptr);
         magic_close(magic_cookie_ptr);
