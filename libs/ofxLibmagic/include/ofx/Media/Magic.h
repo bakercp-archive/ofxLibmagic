@@ -39,20 +39,39 @@ namespace Media {
 
 
 class Magic: public BaseMediaTypeProvider
+    // The Magic class uses libmagic to examine file types.
+    // This is an extension to ofxMediaType, which determines filetypes
+    // based on a database of file suffices.
 {
 public:
     typedef std::shared_ptr<Magic> SharedPtr;
     
     Magic();
+        ///< Create a new magic file type provider.
+
     virtual ~Magic();
+        ///< Destroy a magic file type provider.
 
     Poco::Net::MediaType getMediaTypeForPath(const Poco::Path& path) const;
-    std::string getMediaDescription(const Poco::Path& path, bool bExamineCompressed = false) const;
+        ///< Returns a valid Poco::Net::MediaType for the given path.
+        ///< Throws Poco::IOException on libmagic error.
 
+    std::string getMediaDescription(const Poco::Path& path,
+                                    bool examineCompressed = false) const;
+        ///< Returns a libmagic media description for the given path.
+        ///< Setting exampleCompressed to true, will allow the contents of
+        ///< of zipped and archived files to be traversed.
+        ///< Throws Poco::IOException on libmagic error.
 
-    std::string getType(const Poco::Path& path, int flags) const;
+    std::string getType(const Poco::Path& path, int flags = MAGIC_NONE) const;
+        ///< Get the mime type for the given path.
+        ///< Flags are used when calling `magic_open()`.
+        ///< See http://linux.die.net/man/3/libmagic for a list of flags.
+        ///<
+        ///< Throws Poco::IOException on libmagic error.
 
     static SharedPtr getDefault()
+        ///< Returns a shared instance of the default magic object.
     {
         static SharedPtr ptr = SharedPtr(new Magic());
         return ptr;
