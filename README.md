@@ -6,15 +6,12 @@ File type discovery via libmagic (http://sourceforge.net/projects/libmagic/)!
 You give it a binary file.  It will return a MIME type and description.
 
 
-For Linux (Ubuntu, Raspberry Pi, etc)u
+For Linux (Ubuntu, Raspberry Pi, etc)
 ---
 
-```
-apt-get install libmagic-dev
-```
+`apt-get install libmagic-dev`
 
-N.B. For the moment, addons_config.mk is broken.  So, to use, add -lmagic to your PROJECT_LDFLAGS.  This will be fixed soon.
-
+N.B. For the moment, addons_config.mk is broken.  So, to use, add `-lmagic` to your `PROJECT_LDFLAGS`.  This will be fixed soon.
 
 For Windows
 ---
