@@ -28,8 +28,6 @@
 
 #include "ofMain.h"
 #include "ofxLibmagic.h"
-#include "Poco/File.h"
-#include "Poco/Exception.h"
 
 
 using namespace ofx::Media;
@@ -43,7 +41,7 @@ public:
 
     void dragEvent(ofDragInfo dragInfo);
 
-    BaseMediaTypeProvider::SharedPtr mediaTypeProvider;
+    AbstractMediaTypeProvider::SharedPtr mediaTypeProvider;
 
 
     std::string instructions;
