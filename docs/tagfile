@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<tagfile>
+  <compound kind="class">
+    <name>ofx::Media::Magic</name>
+    <filename>classofx_1_1_media_1_1_magic.html</filename>
+    <member kind="typedef">
+      <type>std::shared_ptr&lt; Magic &gt;</type>
+      <name>SharedPtr</name>
+      <anchorfile>classofx_1_1_media_1_1_magic.html</anchorfile>
+      <anchor>a7ccd827ae654f65cd6c6341906c9e1ec</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>Magic</name>
+      <anchorfile>classofx_1_1_media_1_1_magic.html</anchorfile>
+      <anchor>abcf243d34aefeba81a79890b18d151ec</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~Magic</name>
+      <anchorfile>classofx_1_1_media_1_1_magic.html</anchorfile>
+      <anchor>af27bd7fa210486ed671ba528e2dc4039</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>Poco::Net::MediaType</type>
+      <name>getMediaTypeForPath</name>
+      <anchorfile>classofx_1_1_media_1_1_magic.html</anchorfile>
+      <anchor>af4f5608272c6b80def6ec4425dabbb7f</anchor>
+      <arglist>(const Poco::Path &amp;path) const </arglist>
+    </member>
+    <member kind="function">
+      <type>std::string</type>
+      <name>getMediaDescription</name>
+      <anchorfile>classofx_1_1_media_1_1_magic.html</anchorfile>
+      <anchor>a4ef0de330ba57c961c32265678d1c047</anchor>
+      <arglist>(const Poco::Path &amp;path, bool examineCompressed=false) const </arglist>
+    </member>
+    <member kind="function">
+      <type>std::string</type>
+      <name>getType</name>
+      <anchorfile>classofx_1_1_media_1_1_magic.html</anchorfile>
+      <anchor>a3b014b64b5797f526c3fd66014cbe214</anchor>
+      <arglist>(const Poco::Path &amp;path, int flags=MAGIC_NONE) const </arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static SharedPtr</type>
+      <name>getDefault</name>
+      <anchorfile>classofx_1_1_media_1_1_magic.html</anchorfile>
+      <anchor>a3a6f2a588aa2a048133cc733797710f9</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="dir">
+    <name>include</name>
+    <path>/Users/bakercp/Programming/c-cpp/of-my/openFrameworks/addons/ofxLibmagic/libs/ofxLibMagic/include/</path>
+    <filename>dir_f155b9aed5c9e9fa9ffe145dd58ed5b2.html</filename>
+    <dir>ofx</dir>
+  </compound>
+  <compound kind="dir">
+    <name>libs</name>
+    <path>/Users/bakercp/Programming/c-cpp/of-my/openFrameworks/addons/ofxLibmagic/libs/</path>
+    <filename>dir_15f41d3ddd89141edb44de87b9e81cf5.html</filename>
+    <dir>ofxLibMagic</dir>
+  </compound>
+  <compound kind="dir">
+    <name>Media</name>
+    <path>/Users/bakercp/Programming/c-cpp/of-my/openFrameworks/addons/ofxLibmagic/libs/ofxLibMagic/include/ofx/Media/</path>
+    <filename>dir_2d513d8dc7b0f7c02c01a5ce267ccdbf.html</filename>
+    <file>Magic.h</file>
+  </compound>
+  <compound kind="dir">
+    <name>ofx</name>
+    <path>/Users/bakercp/Programming/c-cpp/of-my/openFrameworks/addons/ofxLibmagic/libs/ofxLibMagic/include/ofx/</path>
+    <filename>dir_21319f5a805c375e09a2c56a46feecf2.html</filename>
+    <dir>Media</dir>
+  </compound>
+  <compound kind="dir">
+    <name>ofxLibMagic</name>
+    <path>/Users/bakercp/Programming/c-cpp/of-my/openFrameworks/addons/ofxLibmagic/libs/ofxLibMagic/</path>
+    <filename>dir_4438042d6fe60fe0dff87fa3f13a09f0.html</filename>
+    <dir>include</dir>
+    <dir>src</dir>
+  </compound>
+  <compound kind="dir">
+    <name>src</name>
+    <path>/Users/bakercp/Programming/c-cpp/of-my/openFrameworks/addons/ofxLibmagic/src/</path>
+    <filename>dir_a3491db0544fca879e52ac2a1eea61ad.html</filename>
+    <file>ofxLibmagic.h</file>
+  </compound>
+  <compound kind="dir">
+    <name>src</name>
+    <path>/Users/bakercp/Programming/c-cpp/of-my/openFrameworks/addons/ofxLibmagic/libs/ofxLibMagic/src/</path>
+    <filename>dir_fd2a250d63db5ff05a2f59d6bf220490.html</filename>
+    <file>Magic.cpp</file>
+  </compound>
+  <compound kind="page">
+    <name>index</name>
+    <title></title>
+    <filename>index</filename>
+  </compound>
+</tagfile>
