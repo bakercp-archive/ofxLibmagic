@@ -26,5 +26,7 @@
 #pragma once
 
 
+#include "Poco/File.h"
+#include "Poco/Exception.h"
+#include "ofx/Media/AbstractMediaTypeProvider.h"
 #include "ofx/Media/Magic.h"
-

@@ -100,4 +100,11 @@ std::string Magic::getType(const Poco::Path& path, int flags) const
 }
 
 
+Magic::SharedPtr Magic::getDefault()
+{
+    static SharedPtr ptr = SharedPtr(new Magic());
+    return ptr;
+}
+
+
 } } // namespace ofx::Media

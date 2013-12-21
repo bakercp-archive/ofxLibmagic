@@ -30,7 +30,7 @@
 #include <magic.h>
 #include "Poco/Exception.h"
 #include "Poco/Net/MediaType.h"
-#include "ofx/Media/BaseMediaTypeProvider.h"
+#include "ofx/Media/AbstractMediaTypeProvider.h"
 #include "ofx/Media/MediaTypeMap.h"
 
 
@@ -38,13 +38,14 @@ namespace ofx {
 namespace Media {
 
 
-class Magic: public BaseMediaTypeProvider
-    // The Magic class uses libmagic to examine file types.
-    // This is an extension to ofxMediaType, which determines filetypes
-    // based on a database of file suffices.
+class Magic: public AbstractMediaTypeProvider
+    /// The Magic class uses libmagic to examine file types.
+    /// This is an extension to ofxMediaType, which determines filetypes
+    /// based on a database of file suffices.
 {
 public:
     typedef std::shared_ptr<Magic> SharedPtr;
+        ///< A shared pointer typedef.
     
     Magic();
         ///< Create a new magic file type provider.
@@ -70,12 +71,8 @@ public:
         ///<
         ///< Throws Poco::IOException on libmagic error.
 
-    static SharedPtr getDefault()
+    static SharedPtr getDefault();
         ///< Returns a shared instance of the default magic object.
-    {
-        static SharedPtr ptr = SharedPtr(new Magic());
-        return ptr;
-    }
 
 };
 
